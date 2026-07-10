@@ -4,6 +4,7 @@ import {
   toggleTaskCompletion,
   deleteTask,
   createTask,
+  updateTask,
 } from "./services/api";
 import TaskList from "./components/TaskList";
 import TaskForm from "./components/TaskForm";
@@ -14,6 +15,10 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [editingTask, setEditingTask] = useState(null);
+
+  const handleEditClick = (task) => setEditingTask(task);
+  const handleCancelEdit = () => setEditingTask(null);
 
   useEffect(() => {
     getAllTasks()
@@ -38,12 +43,18 @@ function App() {
       .catch((err) => setError(err.message));
   };
 
-  const handleCreate = (taskData) => {
-    createTask(taskData)
-      .then((newTask) => {
-        setTasks((prev) => [...prev, newTask]);
-      })
-      .catch((err) => setError(err.message));
+  const handleFormSubmit = (taskData) => {
+    if (editingTask) {
+      return updateTask(editingTask.id, taskData).then((updated) => {
+        setTasks((prev) =>
+          prev.map((t) => (t.id === updated.id ? updated : t)),
+        );
+        setEditingTask(null);
+      });
+    }
+    return createTask(taskData).then((newTask) => {
+      setTasks((prev) => [...prev, newTask]);
+    });
   };
 
   if (loading) return <p>Loading...</p>;
@@ -52,8 +63,17 @@ function App() {
   return (
     <div className="app">
       <h1>Task Manager</h1>
-      <TaskForm onSubmit={handleCreate} />
-      <TaskList tasks={tasks} onToggle={handleToggle} onDelete={handleDelete} />
+      <TaskForm
+        onSubmit={handleFormSubmit}
+        initialTask={editingTask}
+        onCancel={handleCancelEdit}
+      />
+      <TaskList
+        tasks={tasks}
+        onToggle={handleToggle}
+        onDelete={handleDelete}
+        onEdit={handleEditClick}
+      />
     </div>
   );
 }

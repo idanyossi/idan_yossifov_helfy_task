@@ -4,7 +4,7 @@ import "../styles/TaskList.css";
 
 const numOfClones = 3;
 
-export default function TaskList({ tasks, onToggle, onDelete }) {
+export default function TaskList({ tasks, onToggle, onDelete, onEdit }) {
   const trackRef = useRef(null);
   const [slideWidth, setSlideWidth] = useState(0);
   const [index, setIndex] = useState(numOfClones);
@@ -76,7 +76,12 @@ export default function TaskList({ tasks, onToggle, onDelete }) {
       >
         {listItems.map((task, i) => (
           <div className="task-list-slide" key={`${task.id}-${i}`}>
-            <TaskItem task={task} onToggle={onToggle} onDelete={onDelete} />
+            <TaskItem
+              task={task}
+              onToggle={onToggle}
+              onDelete={onDelete}
+              onEdit={onEdit}
+            />
           </div>
         ))}
       </div>

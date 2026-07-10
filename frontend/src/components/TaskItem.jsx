@@ -1,6 +1,6 @@
 import "../styles/TaskItem.css";
 
-export default function TaskItem({ task, onToggle, onDelete }) {
+export default function TaskItem({ task, onToggle, onDelete, onEdit }) {
   const handleDeleteClick = () => {
     if (window.confirm(`Delete "${task.title}"?`)) {
       onDelete(task.id);
@@ -20,12 +20,15 @@ export default function TaskItem({ task, onToggle, onDelete }) {
         <p className="task-status">
           {task.completed ? "Completed" : "Pending"}
         </p>
-        <button onClick={() => onToggle(task.id)}>
-          {task.completed ? "Mark Pending" : "Mark Complete"}
-        </button>
-        <button onClick={handleDeleteClick} className="delete-button">
-          Delete
-        </button>
+        <div className="task-item-actions">
+          <button onClick={() => onToggle(task.id)}>
+            {task.completed ? "Mark Pending" : "Mark Complete"}
+          </button>
+          <button onClick={() => onEdit(task)}>Edit</button>
+          <button onClick={handleDeleteClick} className="delete-button">
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   );
