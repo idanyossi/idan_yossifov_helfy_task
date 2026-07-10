@@ -36,6 +36,12 @@ function updateTask(id, {title,description,priority}) {
     return task;
 }
 
+function deleteTask(id) {
+    const index = tasks.findIndex((task) => task.id === id);
+    if (index === -1) return false;
+    tasks.splice(index, 1);
+    return true;
+}
 
 
 
@@ -64,6 +70,6 @@ function seedData() {
   });
 }
 
-module.exports = { PRIORITIES, getAllTasks, getById, createTask, updateTask, seedData};
+module.exports = { PRIORITIES, getAllTasks, getById, createTask, updateTask, deleteTask, seedData};
 
 

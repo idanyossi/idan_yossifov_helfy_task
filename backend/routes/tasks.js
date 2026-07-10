@@ -10,6 +10,18 @@ const missingId = (id) => notFoundError(`Task with id ${id} not found`);
 
 // Where we define all of the routes and what they do
 
+// Helper route for testing purposes using the getById function from the store
+// GET /api/tasks/:id
+router.get('/:id', validateId, (req, res) => {
+    const task = store.getById(req.taskId);
+    if (!task) {
+        return res.status(404).json({ error: `Task with id ${req.taskId} not found` });
+    }
+    res.json(task);
+});
+
+// Actual Endpoints per the required specification
+
 // GET /api/tasks
 router.get('/', (req, res) => {
     res.json(store.getAllTasks());
@@ -30,6 +42,14 @@ router.put('/:id', validateId, validateTaskBody, (req, res) => {
     res.json(task);
 });
 
+// DELETE /api/tasks/:id
+router.delete('/:id', validateId, (req, res) => {
+    const deleted = store.deleteTask(req.taskId);
+    if (!deleted) {
+        return res.status(404).json({ error: `Task with id ${req.taskId} not found` });
+    }
+    res.status(204).send();
+});
 
 
 module.exports = router;
