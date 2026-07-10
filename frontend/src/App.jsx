@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
-import { getAllTasks, toggleTaskCompletion, deleteTask } from "./services/api";
+import {
+  getAllTasks,
+  toggleTaskCompletion,
+  deleteTask,
+  createTask,
+} from "./services/api";
 import TaskList from "./components/TaskList";
+import TaskForm from "./components/TaskForm";
 
 import "./App.css";
 
@@ -32,12 +38,21 @@ function App() {
       .catch((err) => setError(err.message));
   };
 
+  const handleCreate = (taskData) => {
+    createTask(taskData)
+      .then((newTask) => {
+        setTasks((prev) => [...prev, newTask]);
+      })
+      .catch((err) => setError(err.message));
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
     <div className="app">
       <h1>Task Manager</h1>
+      <TaskForm onSubmit={handleCreate} />
       <TaskList tasks={tasks} onToggle={handleToggle} onDelete={handleDelete} />
     </div>
   );

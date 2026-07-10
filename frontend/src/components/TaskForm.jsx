@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../styles/TaskForm.css";
 
 export default function TaskForm({ onSubmit }) {
   const [title, setTitle] = useState("");
