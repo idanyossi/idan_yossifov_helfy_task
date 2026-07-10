@@ -1,4 +1,6 @@
 .task-item {
+  display: flex;
+  flex-direction: column;
   background: var(--bg);
   border: 1px solid var(--border);
   border-left: 4px solid var(--priority-color, var(--border));
@@ -49,4 +51,28 @@
   font-size: 13px;
   font-weight: 600;
   color: var(--text);
+}
+
+/*Styling for the toggle button*/
+
+.task-item-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-item-footer button {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+  cursor: pointer;
+}
+
+.task-item-footer button:hover {
+  border-color: var(--accent);
+  background: var(--accent-bg);
 }

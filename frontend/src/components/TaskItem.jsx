@@ -1,6 +1,6 @@
 import "../styles/TaskItem.css";
 
-export default function TaskItem({ task }) {
+export default function TaskItem({ task, onToggle }) {
   return (
     <div
       className="task-item"
@@ -11,7 +11,14 @@ export default function TaskItem({ task }) {
         <span className={`priority ${task.priority}`}>{task.priority}</span>
       </div>
       <p>{task.description}</p>
-      <p className="task-status">{task.completed ? "Completed" : "Pending"}</p>
+      <div className="task-item-footer">
+        <p className="task-status">
+          {task.completed ? "Completed" : "Pending"}
+        </p>
+        <button onClick={() => onToggle(task.id)}>
+          {task.completed ? "Mark Pending" : "Mark Complete"}
+        </button>
+      </div>
     </div>
   );
 }

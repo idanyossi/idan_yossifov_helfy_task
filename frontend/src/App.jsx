@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getAllTasks } from "./services/api";
+import { getAllTasks, toggleTaskCompletion } from "./services/api";
 import TaskList from "./components/TaskList";
 
 import "./App.css";
@@ -16,13 +16,21 @@ function App() {
       .finally(() => setLoading(false));
   }, []);
 
+  const handleToggle = (id) => {
+    toggleTaskCompletion(id)
+      .then((updatedTask) => {
+        setTasks((prev) => prev.map((t) => (t.id === id ? updatedTask : t)));
+      })
+      .catch((err) => setError(err.message));
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
     <div className="app">
       <h1>Task Manager</h1>
-      <TaskList tasks={tasks} />
+      <TaskList tasks={tasks} onToggle={handleToggle} />
     </div>
   );
 }
