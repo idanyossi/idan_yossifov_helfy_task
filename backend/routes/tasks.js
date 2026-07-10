@@ -1,6 +1,5 @@
 const express = require('express');
 const store = require('../data/store');
-const { notFoundError } = require('../middleware/errorHandler');
 const { validateId, validateTaskBody } = require('../middleware/validations');
 
 

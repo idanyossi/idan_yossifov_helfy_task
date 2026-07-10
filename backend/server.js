@@ -3,7 +3,6 @@ const cors = require('cors');
 
 const taskRoutes = require('./routes/tasks');
 const storeData = require('./data/store');
-const {notFound, errorHandler} = require('./middleware/errorHandler');
 
 const app = express();
 const PORT = 4000;
