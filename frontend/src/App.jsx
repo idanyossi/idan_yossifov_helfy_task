@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getAllTasks } from "./services/api";
+
 import "./App.css";
 
 function App() {
@@ -6,9 +8,26 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  useEffect(() => {
+    getAllTasks()
+      .then(setTasks)
+      .catch((error) => setError(error.message))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+
   return (
     <div className="app">
       <h1>Task Manager</h1>
+      <ul>
+        {tasks.map((task) => (
+          <li key={task.id}>
+            {task.title} - {task.priority}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
