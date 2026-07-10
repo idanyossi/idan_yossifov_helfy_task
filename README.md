@@ -53,12 +53,12 @@ Two shapes are used depending on the failure:
 ## Design decisions & assumptions
 
 - **In-memory storage** — data resets on server restart. The backend seeds 12 sample tasks on boot so the carousel and UI have real content to demo immediately.
-- **Endless carousel** — implemented from scratch with cloned-edge slides: a few real tasks are duplicated onto both ends of the array so that scrolling "past the end" actually lands on a clone that looks identical to the real first (or last) item. Once that clone is fully in view, the position snaps back to the real equivalent with the CSS transition disabled for one frame, so the loop is visually seamless. Slide position is driven by transform: translateX(...).
+- **Endless carousel** — implemented from scratch with cloned-edge slides: a few real tasks are duplicated onto both ends of the array so that scrolling "past the end" actually lands on a clone that looks identical to the real first (or last) item. Once that clone is fully in view, the position snaps back to the real item with the CSS transition disabled for one frame, so it seems perfectly smooth. Slide position is driven by transform: translateX(...).
 - **`GET /api/tasks/:id`** — added beyond the required endpoint list purely to make manual testing easier (fetch one task without filtering the full list client-side). Not required by the spec. Used to check before and after looks of tasks after an update or a deletion
 - **Delete confirmation** uses the native `window.confirm()` dialog rather than a custom modal component (because of time constraints)
-- **`TaskForm` doubles as both the create and edit form**, switching mode based on whether an `initialTask` prop is passed in, rather than building two separate components.
+- **`TaskForm` doubles as both the create and edit form**, switching mode based on whether an `initialTask` prop is passed in, rather than building two separate components (done out of time constraints).
 
 ## Time spent
 
-- Backend API — 1hr 45min
-- Frontend core features — TBD
+- Backend API — 1hr 45mins
+- Frontend core features + simple styling — 2hr 30mins
