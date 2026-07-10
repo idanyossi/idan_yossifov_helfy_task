@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getAllTasks } from "./services/api";
+import TaskList from "./components/TaskList";
 
 import "./App.css";
 
@@ -21,13 +22,7 @@ function App() {
   return (
     <div className="app">
       <h1>Task Manager</h1>
-      <ul>
-        {tasks.map((task) => (
-          <li key={task.id}>
-            {task.title} - {task.priority}
-          </li>
-        ))}
-      </ul>
+      <TaskList tasks={tasks} />
     </div>
   );
 }
