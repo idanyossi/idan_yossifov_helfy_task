@@ -1,0 +1,50 @@
+/*Styling for the list itself*/
+.task-list-container {
+  overflow: hidden;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.task-list-track {
+  display: flex;
+}
+
+.task-list-slide {
+  flex: 0 0 100%;
+  box-sizing: border-box;
+  padding: 0 8px;
+}
+
+@media (min-width: 768px) {
+  .task-list-slide {
+    flex: 0 0 33.3333%;
+  }
+}
+
+/*Styling for the buttons*/
+.task-list-controls {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.task-list-controls button {
+  font-family: var(--sans);
+  font-size: 14px;
+  padding: 8px 18px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.task-list-controls button:hover {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}

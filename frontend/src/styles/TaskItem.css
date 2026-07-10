@@ -1,0 +1,52 @@
+.task-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--priority-color, var(--border));
+  border-radius: 8px;
+  padding: 16px 18px;
+  box-shadow: var(--shadow);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  text-align: left;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.task-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.task-item-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: var(--text-h);
+}
+
+.task-item p {
+  color: var(--text);
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: #fff;
+  background: var(--priority-color, var(--border));
+  white-space: nowrap;
+}
+
+.task-status {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}

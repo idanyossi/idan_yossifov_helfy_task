@@ -1,3 +1,5 @@
+import "../styles/TaskItem.css";
+
 export default function TaskItem({ task }) {
   return (
     <div className="task-item">
