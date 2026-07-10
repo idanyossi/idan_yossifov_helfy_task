@@ -12,7 +12,7 @@ function getById(id) {
     return tasks.find((task) => task.id === id);
 }
 
-function createTask(title, description, priority) {
+function createTask(title, description ='', priority = 'medium') {
     const task = {
         id: nextId++,
         title,
@@ -22,6 +22,17 @@ function createTask(title, description, priority) {
         priority,
     };
     tasks.push(task);
+    return task;
+}
+
+function updateTask(id, {title,description,priority}) {
+    const task = getById(id);
+    if (!task) {
+        return null;
+    }
+    task.title = title;
+    task.description = description;
+    task.priority = priority;
     return task;
 }
 
@@ -53,6 +64,6 @@ function seedData() {
   });
 }
 
-module.exports = { PRIORITIES, getAllTasks, getById, createTask, seedData};
+module.exports = { PRIORITIES, getAllTasks, getById, createTask, updateTask, seedData};
 
 
