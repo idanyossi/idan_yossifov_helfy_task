@@ -38,9 +38,20 @@ function updateTask(id, {title,description,priority}) {
 
 function deleteTask(id) {
     const index = tasks.findIndex((task) => task.id === id);
-    if (index === -1) return false;
+    if (index === -1){
+        return false;
+    } 
     tasks.splice(index, 1);
     return true;
+}
+
+function toggleTaskCompletion(id) {
+    const task = getById(id);
+    if (!task) {
+        return null;
+    }
+    task.completed = !task.completed;
+    return task;
 }
 
 
@@ -70,6 +81,6 @@ function seedData() {
   });
 }
 
-module.exports = { PRIORITIES, getAllTasks, getById, createTask, updateTask, deleteTask, seedData};
+module.exports = { PRIORITIES, getAllTasks, getById, createTask, updateTask, deleteTask, toggleTaskCompletion, seedData};
 
 

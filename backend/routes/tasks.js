@@ -51,6 +51,15 @@ router.delete('/:id', validateId, (req, res) => {
     res.status(204).send();
 });
 
+// PATCH /api/tasks/:id/toggle
+router.patch('/:id/toggle', validateId, (req, res) => {
+    const task = store.toggleTaskCompletion(req.taskId);
+    if (!task) {
+        return res.status(404).json({ error: `Task with id ${req.taskId} not found` });
+    }
+    res.json(task);
+});
+
 
 module.exports = router;
 
