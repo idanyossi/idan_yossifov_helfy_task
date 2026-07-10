@@ -60,5 +60,5 @@ Two shapes are used depending on the failure:
 
 ## Time spent
 
-- Backend API — 1hr 45mins
-- Frontend core features + simple styling — 2hr 15mins
+- Backend API + Debugging — 1hr 45mins
+- Frontend core features + simple styling + Debugging — 2hr 15mins
