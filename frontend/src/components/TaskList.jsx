@@ -18,7 +18,7 @@ export default function TaskList({ tasks, onToggle, onDelete, onEdit }) {
   const [prevTasksLength, setPrevTasksLength] = useState(tasks.length);
   if (tasks.length !== prevTasksLength) {
     setPrevTasksLength(tasks.length);
-    setIndex(numOfClones);
+    setIndex(isloopEnabled ? numOfClones : 0);
   }
 
   useLayoutEffect(() => {
